@@ -15,7 +15,7 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
     
-    io.emit('clientConnected', "Client connected on port: " + PORT + " and index: " + INDEX)
+    io.emit('clientConnected', "Client with SOCKET ID: " + socket.id + " connected on port: " + PORT + " and index: " + INDEX)
     
     socket.on('message', (text) => {
         io.emit('messageReceived', text)
