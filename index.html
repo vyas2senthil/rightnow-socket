@@ -1,13 +1,18 @@
 <html>
-  <body>
-    <p id='server-time'></p>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io();
-      var el = document.getElementById('server-time');
-      socket.on('time', function(timeString) {
-        el.innerHTML = 'Server time: ' + timeString;
-      });
-    </script>
-  </body>
+    <body>
+        <p id='stringify-socket'></p>
+        <p id='server-time'></p>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            var el = document.getElementById('server-time');
+            var ss = document.getElementById('stringify-socket');
+            socket.on('time', function(timeString) {
+                el.innerHTML = 'Server time: ' + timeString;
+            });
+            socket.on('connection', function(stringifySocket) {
+                ss.innerHTML = stringifySocket;
+            });
+        </script>
+    </body>
 </html>
