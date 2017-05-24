@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
     io.emit('clientConnected', "Client with SOCKET ID: " + socket.id + " connected on port: " + PORT + " and index: " + INDEX)
     
     socket.on('message', (text) => {
-        io.emit('messageReceived', text)
+        io.broadcast.emit('messageReceived', text)
     });
     
     socket.on('disconnect', () => {
