@@ -14,9 +14,9 @@ const server = express()
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
-    io.emit('connect', "Client connected")
+    io.emit('clientConnected', "Client connected")
     socket.on('disconnect', () => {
-        io.emit('disconnect', "Client disconnected")
+        io.emit('clientDisconnected', "Client disconnected")
     });
 });
 

@@ -5,13 +5,13 @@
         <script>
             var socket = io();
             var logs = document.getElementById('logs');
-            socket.on('connect', function(string) {
+            socket.on('clientConnected', function(string) {
                 var node = document.createElement("LI");
                 var textnode = document.createTextNode('CONNECT: ' + string);
                 node.appendChild(textnode);
                 logs.appendChild(node);
             });
-            socket.on('disconnect', function(string) {
+            socket.on('clientDisconnected', function(string) {
                 var node = document.createElement("LI");
                 var textnode = document.createTextNode('DISCONNECT: ' + string);
                 node.appendChild(textnode);
