@@ -1,6 +1,14 @@
 <html>
     <body>
-        <ul id='logs'></ul>
+        <div style="float:left;width:50%;padding:10px">
+            <ul id='logs'></ul>
+        </div>
+        <div style="float:left;width:50%;padding:10px">
+            <form id="sendMessage">
+                <input type="text" />
+                <input type="submit" />
+            </form>
+        </div>
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();
