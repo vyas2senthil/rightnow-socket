@@ -15,7 +15,7 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
     console.log('Client connected');
-    io.emit('connection', JSON.stringify(socket))
+    io.emit('connection', socket)
     socket.on('disconnect', () => {
         console.log('Client disconnected')
     });
