@@ -1,17 +1,27 @@
 <html>
     <body>
-        <p id='str'></p>
-        <p id='server-time'></p>
+        <ul id='logs'></ul>
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();
-            var el = document.getElementById('server-time');
-            var str = document.getElementById('str');
-            socket.on('time', function(timeString) {
-                el.innerHTML = 'Server time: ' + timeString;
+            var logs = document.getElementById('logs');
+            socket.on('connect', function(string) {
+                var node = document.createElement("LI");
+                var textnode = document.createTextNode('CONNECT' + string);
+                node.appendChild(textnode);
+                logs.appendChild(node);
             });
-            socket.on('test', function(string) {
-                str.innerHTML = string;
+            socket.on('disconnect', function(string) {
+                var node = document.createElement("LI");
+                var textnode = document.createTextNode('DISCONNECT' + string);
+                node.appendChild(textnode);
+                logs.appendChild(node);
+            });
+            socket.on('time', function(string) {
+                var node = document.createElement("LI");
+                var textnode = document.createTextNode('TIME' + string);
+                node.appendChild(textnode);
+                logs.appendChild(node);
             });
         </script>
     </body>
