@@ -7,19 +7,19 @@
             var logs = document.getElementById('logs');
             socket.on('connect', function(string) {
                 var node = document.createElement("LI");
-                var textnode = document.createTextNode('CONNECT' + string);
+                var textnode = document.createTextNode('CONNECT: ' + string);
                 node.appendChild(textnode);
                 logs.appendChild(node);
             });
             socket.on('disconnect', function(string) {
                 var node = document.createElement("LI");
-                var textnode = document.createTextNode('DISCONNECT' + string);
+                var textnode = document.createTextNode('DISCONNECT: ' + string);
                 node.appendChild(textnode);
                 logs.appendChild(node);
             });
             socket.on('time', function(string) {
                 var node = document.createElement("LI");
-                var textnode = document.createTextNode('TIME' + string);
+                var textnode = document.createTextNode('TIME: ' + string);
                 node.appendChild(textnode);
                 logs.appendChild(node);
             });
