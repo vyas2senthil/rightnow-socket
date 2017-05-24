@@ -14,10 +14,17 @@ const server = express()
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
+    
     io.emit('clientConnected', "Client connected")
+    
+    socket.on('message', (text) => {
+        io.emit('messageReceived', text)
+    });
+    
     socket.on('disconnect', () => {
         io.emit('clientDisconnected', "Client disconnected")
     });
+    
 });
 
 setInterval(() => io.emit('time', new Date().toTimeString()), 10000);

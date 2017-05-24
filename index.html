@@ -5,8 +5,8 @@
         </div>
         <div style="float:left;width:50%;padding:10px">
             <form id="sendMessage">
-                <input type="text" />
-                <input type="submit" />
+                <input type="text" id="message" />
+                <input type="submit" onclick="sendMessage()" />
             </form>
         </div>
         <script src="/socket.io/socket.io.js"></script>
@@ -31,6 +31,17 @@
                 node.appendChild(textnode);
                 logs.appendChild(node);
             });
+            socket.on('messageReceived', function(string) {
+                var node = document.createElement("LI");
+                var textnode = document.createTextNode('MESSAGE RECEIVED: ' + string);
+                node.appendChild(textnode);
+                logs.appendChild(node);
+            });
+            function sendMessage() {
+                var input = document.getElementById('message');
+                var val = input.value;
+                socket.emit('message', val);
+            }
         </script>
     </body>
 </html>
