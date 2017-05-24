@@ -1,0 +1,27 @@
+{
+  "name": "rightnow-socket",
+  "version": "1.0.0",
+  "description": "websocket application for realtime handling in rightnow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ipno84/rightnow-socket.git"
+  },
+  "keywords": [
+    "rightnow",
+    "socket"
+  ],
+  "author": "Marco Abate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ipno84/rightnow-socket/issues"
+  },
+  "homepage": "https://github.com/Ipno84/rightnow-socket#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.1"
+  }
+}
