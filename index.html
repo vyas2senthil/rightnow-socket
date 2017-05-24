@@ -1,17 +1,17 @@
 <html>
     <body>
-        <p id='stringify-socket'></p>
+        <p id='str'></p>
         <p id='server-time'></p>
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();
             var el = document.getElementById('server-time');
-            var ss = document.getElementById('stringify-socket');
+            var str = document.getElementById('str');
             socket.on('time', function(timeString) {
                 el.innerHTML = 'Server time: ' + timeString;
             });
-            socket.on('connection', function(stringifySocket) {
-                ss.innerHTML = stringifySocket;
+            socket.on('test', function(string) {
+                str.innerHTML = string;
             });
         </script>
     </body>
