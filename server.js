@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
     
     socket.on('get_location_moments', (payload) => {
         request({
-            url: '',
+            url: 'http://rightnow01.altervista.org/moments/location/?id_location=5',
             method: 'GET',
             data: payload
         }, function(err, res, body) {
