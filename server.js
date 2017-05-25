@@ -38,6 +38,17 @@ io.on('connection', (socket) => {
         });
     });
     
+    socket.on('getMapMarkers', (payload) => {
+        request({
+            url: API_BASEURL + '/locations/filter/',
+            method: 'GET',
+            data: payload,
+            json: true
+        }, function(err, res, body) {
+            io.to(socket.id).emit('setMapMarkers', body)
+        });
+    });
+    
     socket.on('disconnect', () => {
         io.emit('clientDisconnected', "Client disconnected")
     });
