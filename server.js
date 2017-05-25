@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
             json: true
         }, function(err, res, body) {
             // socket.broadcast.to(socket.id).emit('set_location_moments', body)
-            io.emit('set_location_moments', socket.id)
+            io.emit('set_location_moments', io)
         });
     });
     
