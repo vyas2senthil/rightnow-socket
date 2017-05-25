@@ -16,6 +16,10 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();
+            var currentSocketId = null;
+            socket.on('set_socket_id', function(socketId) {
+                currentSocketId = socketId;
+            });
             var logs = document.getElementById('logs');
             socket.on('clientConnected', function(string) {
                 var node = document.createElement("LI");
@@ -53,7 +57,8 @@
                 var input = document.getElementById('id_location');
                 var val = input.value;
                 var body = {
-                    id_location: val
+                    id_location: val,
+                    socket_id = currentSocketId
                 }
                 socket.emit('get_location_moments', body);
             }

@@ -16,6 +16,8 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
     
+    io.emit('set_socket_id', socket.id)
+    
     io.emit('clientConnected', "Client with SOCKET ID: " + socket.id + " connected on port: " + PORT + " and index: " + INDEX)
     
     socket.on('message', (text) => {
@@ -29,7 +31,7 @@ io.on('connection', (socket) => {
             data: payload,
             json: true
         }, function(err, res, body) {
-            io.emit('set_location_moments', body)
+            io.broadcast.to(payload.socket_id).emit('set_location_moments', body)
         });
     });
     
