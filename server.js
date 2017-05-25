@@ -8,6 +8,8 @@ const request = require('ajax-request');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
+const API_BASEURL = "https://rightnow.000webhostapp.com";
+
 const server = express()
     .use((req, res) => res.sendFile(INDEX) )
     .listen(PORT, () => console.log(`Listening on ${ PORT }`));
@@ -15,6 +17,8 @@ const server = express()
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
+    
+    console.log(socket)
     
     io.emit('clientConnected', "Client with SOCKET ID: " + socket.id + " connected on port: " + PORT + " and index: " + INDEX)
     
@@ -24,13 +28,13 @@ io.on('connection', (socket) => {
     
     socket.on('get_location_moments', (payload) => {
         request({
-            url: 'http://rightnow01.altervista.org/moments/location/',
+            url: API_BASEURL + '/moments/location/',
             method: 'GET',
             data: payload,
             json: true
         }, function(err, res, body) {
             // socket.broadcast.to(socket.id).emit('set_location_moments', body)
-            io.emit('set_location_moments', socket)
+            io.emit('set_location_moments', body)
         });
     });
     
