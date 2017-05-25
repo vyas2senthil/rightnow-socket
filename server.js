@@ -3,6 +3,7 @@
 const express = require('express');
 const socketIO = require('socket.io');
 const path = require('path');
+const request = require('ajax-request');
 
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
@@ -19,6 +20,16 @@ io.on('connection', (socket) => {
     
     socket.on('message', (text) => {
         io.emit('messageReceived', text)
+    });
+    
+    socket.on('get_location_moments', (payload) => {
+        request({
+            url: '',
+            method: 'GET',
+            data: payload
+        }, function(err, res, body) {
+            io.emit('set_location_moments', body)
+        });
     });
     
     socket.on('disconnect', () => {

@@ -8,6 +8,10 @@
                 <input type="text" id="message" />
                 <button type="button" onclick="sendMessage()">INVIA MESSAGGIO</button>
             </form>
+            <form id="sendMessage">
+                <input type="text" id="id_location" />
+                <button type="button" onclick="getLocationMoments()">GET LOCATION MOMENTS</button>
+            </form>
         </div>
         <script src="/socket.io/socket.io.js"></script>
         <script>
@@ -37,10 +41,21 @@
                 node.appendChild(textnode);
                 logs.appendChild(node);
             });
+            socket.on('set_location_moments', function(response) {
+                console.log(response)
+            });
             function sendMessage() {
                 var input = document.getElementById('message');
                 var val = input.value;
                 socket.emit('message', val);
+            }
+            function getLocationMoments() {
+                var input = document.getElementById('id_location');
+                var val = input.value;
+                var body = {
+                    id_location: val
+                }
+                socket.emit('get_location_moments', body);
             }
         </script>
     </body>

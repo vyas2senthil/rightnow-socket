@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Ipno84/rightnow-socket#readme",
   "dependencies": {
+    "ajax-request": "^1.2.1",
     "express": "^4.15.3",
     "socket.io": "^2.0.1"
   }
