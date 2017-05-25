@@ -16,22 +16,20 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
     
-    io.emit('set_socket_id', socket.id)
-    
     io.emit('clientConnected', "Client with SOCKET ID: " + socket.id + " connected on port: " + PORT + " and index: " + INDEX)
     
     socket.on('message', (text) => {
         io.emit('messageReceived', text)
     });
     
-    socket.on('get_location_moments', (payload) => {
+    socket.on('get_location_moments', (id, payload) => {
         request({
             url: 'http://rightnow01.altervista.org/moments/location/',
             method: 'GET',
             data: payload,
             json: true
         }, function(err, res, body) {
-            io.to(payload.socket_id).emit('set_location_moments', body)
+            socket.broadcast.to(id).emit('set_location_moments', body)
         });
     });
     
