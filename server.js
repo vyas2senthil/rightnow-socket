@@ -34,7 +34,6 @@ io.on('connection', (socket) => {
             json: true
         }, function(err, res, body) {
             console.log(socket.id)
-            // socket.broadcast.to(socket.id).emit('set_location_moments', body)
             io.to(socket.id).emit('set_location_moments', body)
         });
     });
