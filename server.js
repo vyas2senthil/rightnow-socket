@@ -22,14 +22,14 @@ io.on('connection', (socket) => {
         io.emit('messageReceived', text)
     });
     
-    socket.on('get_location_moments', (id, payload) => {
+    socket.on('get_location_moments', (payload) => {
         request({
             url: 'http://rightnow01.altervista.org/moments/location/',
             method: 'GET',
             data: payload,
             json: true
         }, function(err, res, body) {
-            socket.broadcast.to(id).emit('set_location_moments', body)
+            socket.broadcast.to(socket.id).emit('set_location_moments', body)
         });
     });
     
