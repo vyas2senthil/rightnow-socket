@@ -17,9 +17,10 @@
             </div>
         </div>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script>
             var socket = io();
-            var logs = document.getElementById('logs');
+            var logs = $('#logs');
             socket.on('clientConnected', function(response) {
                 setupLog('clientConnected',response,true)
             });
@@ -33,11 +34,11 @@
                 setupLog('setSendToOthers',response,false)
             });
             function sendMessage() {
-                var val = document.getElementById('message').value;
+                var val = $('#message').val();
                 socket.emit('message', val);
             }
             function getLocationMoments() {
-                var val = document.getElementById('id_location').value;
+                var val = $('#id_location').val();
                 var body = {id_location: val}
                 socket.emit('getLocationMoments', body);
             }
@@ -46,10 +47,8 @@
             }
             function setupLog(event,response,print) {
                 if(print) {
-                    var node = document.createElement("LI");
-                    var textnode = document.createTextNode('<strong>'+event+'</strong>: ' + response);
-                    node.appendChild(textnode);
-                    logs.appendChild(node);
+                    var log = "<li>" + "<strong>" + event + "</strong>" + ": " + response + "</li>";
+                    logs.append(log)
                 } else {
                     console.log(event,response)
                 }
