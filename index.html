@@ -12,6 +12,7 @@
                 <input type="text" id="id_location" />
                 <button type="button" onclick="getLocationMoments()">GET LOCATION MOMENTS</button>
             </form>
+            <button type="button" onclick="sendToOthers()">SEND TO OTHERS</button>
         </div>
         <script src="/socket.io/socket.io.js"></script>
         <script>
@@ -44,6 +45,9 @@
             socket.on('set_location_moments', function(response) {
                 console.log(response)
             });
+            socket.on('set_send_to_others', function(response) {
+                console.log(response)
+            });
             function sendMessage() {
                 var input = document.getElementById('message');
                 var val = input.value;
@@ -56,6 +60,9 @@
                     id_location: val
                 }
                 socket.emit('get_location_moments', body);
+            }
+            function sendToOthers() {
+                socket.emit('get_send_to_others');
             }
         </script>
     </body>
