@@ -20,7 +20,7 @@
         <script>
             var socket = io();
             var logs = document.getElementById('logs');
-            socket.on('clientConnected', function(string) {
+            socket.on('clientConnected', function(response) {
                 setupLog('clientConnected',response,true)
             });
             socket.on('messageReceived', function(response) {
