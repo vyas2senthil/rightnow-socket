@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
             data: payload,
             json: true
         }, function(err, res, body) {
-            socket.emit('suggestGetMapMarkers')
+            io.emit('suggestGetMapMarkers')
         });
     });
     
