@@ -62,7 +62,8 @@
                 socket.emit('get_location_moments', body);
             }
             function sendToOthers() {
-                socket.broadcast.emit('get_send_to_others');
+                console.log(socket)
+                socket.emit('get_send_to_others');
             }
         </script>
     </body>
