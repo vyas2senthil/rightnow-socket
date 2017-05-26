@@ -10,20 +10,20 @@
     <body>
         <div class="flex">
             <div class="col-md-4">
-                <form id="sendMessage">
+                <form id="sendMessage" class="form-inline" style="padding: 20px 0;">
                     <div class="form-group">
                         <input type="text" class="form-control" id="message" />
                     </div>
-                    <button type="submit" class="btn btn-default">INVIA MESSAGGIO</button>
+                    <button type="submit" class="btn btn-primary">INVIA MESSAGGIO</button>
                 </form>
-                <form id="getLocationMoments">
+                <form id="getLocationMoments" class="form-inline" style="padding: 20px 0;">
                     <div class="form-group">
                         <input type="text" class="form-control" id="id_location" />
                     </div>
-                    <button type="submit" class="btn btn-default">GET LOCATION MOMENTS</button>
+                    <button type="submit" class="btn btn-primary">GET LOCATION MOMENTS</button>
                 </form>
-                <form id="sendToOthers">
-                    <button type="submit" class="btn btn-default">SEND TO OTHERS</button>
+                <form id="sendToOthers" class="form-inline" style="padding: 20px 0;">
+                    <button type="submit" class="btn btn-primary">SEND TO OTHERS</button>
                 </form>
             </div>
             <div class="col-md-8">
@@ -72,6 +72,7 @@
                     var val = $('#message').val();
                     if(val) {
                         socket.emit('message', val);
+                        $('#message').val("");
                     }
                 })
             }
@@ -83,6 +84,7 @@
                     if(val) {
                         var body = {id_location: val}
                         socket.emit('getLocationMoments', body);
+                        $('#id_location').val("");
                     }
                 })
             }
