@@ -24,6 +24,10 @@ io.on('connection', (socket) => {
         io.emit('messageReceived', text)
     });
     
+    socket.on('get_send_to_others', (text) => {
+        socket.emit('set_send_to_others', text)
+    });
+    
     socket.on('get_location_moments', (payload) => {
         request({
             url: API_BASEURL + '/moments/location/',
