@@ -96,7 +96,8 @@
 
             var setupLog = $.fn.setupLog = function(event,response,print) {
                 if(print) {
-                    logs.append("<li>" + "<strong>" + event + "</strong>" + ": " + response + "</li>")
+                    var log = $("<li>" + "<strong>" + event + "</strong>" + ": " + response + "</li>")
+                    logs.append(log)
                 } else {
                     console.log(event,response)
                 }
