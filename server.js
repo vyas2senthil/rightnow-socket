@@ -18,17 +18,17 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
     
-    io.emit('clientConnected', "Client with SOCKET ID: " + socket.id + " connected on port: " + PORT + " and index: " + INDEX)
+    io.emit('clientConnected', socket.id + " connected on port: " + PORT)
     
     socket.on('message', (text) => {
         io.emit('messageReceived', text)
     });
     
-    socket.on('get_send_to_others', (text) => {
-        socket.broadcast.emit('set_send_to_others', text)
+    socket.on('getSendToOthers', (text) => {
+        socket.broadcast.emit('setSendToOthers', text)
     });
     
-    socket.on('get_location_moments', (payload) => {
+    socket.on('getLocationMoments', (payload) => {
         request({
             url: API_BASEURL + '/moments/location/',
             method: 'GET',
@@ -36,7 +36,6 @@ io.on('connection', (socket) => {
             json: true
         }, function(err, res, body) {
             socket.emit('set_location_moments', body)
-            // io.to(socket.id).emit('set_location_moments', body)
         });
     });
     
@@ -47,13 +46,8 @@ io.on('connection', (socket) => {
             data: payload,
             json: true
         }, function(err, res, body) {
-            // io.to(socket.id).emit('setMapMarkers', body)
             socket.emit('setMapMarkers', body)
         });
-    });
-    
-    socket.on('disconnect', () => {
-        io.emit('clientDisconnected', "Client disconnected")
     });
     
 });

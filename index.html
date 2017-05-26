@@ -19,44 +19,38 @@
             var socket = io();
             var logs = document.getElementById('logs');
             socket.on('clientConnected', function(string) {
-                var node = document.createElement("LI");
-                var textnode = document.createTextNode('CONNECT: ' + string);
-                node.appendChild(textnode);
-                logs.appendChild(node);
+                setupLog('clientConnected',response,true)
             });
-            socket.on('clientDisconnected', function(string) {
-                var node = document.createElement("LI");
-                var textnode = document.createTextNode('DISCONNECT: ' + string);
-                node.appendChild(textnode);
-                logs.appendChild(node);
+            socket.on('messageReceived', function(response) {
+                setupLog('messageReceived',response,true)
             });
-            socket.on('messageReceived', function(string) {
-                var node = document.createElement("LI");
-                var textnode = document.createTextNode('MESSAGE RECEIVED: ' + string);
-                node.appendChild(textnode);
-                logs.appendChild(node);
+            socket.on('getLocationMoments', function(response) {
+                setupLog('getLocationMoments',response,false)
             });
-            socket.on('set_location_moments', function(response) {
-                console.log(response)
-            });
-            socket.on('set_send_to_others', function(response) {
-                console.log(response)
+            socket.on('setSendToOthers', function(response) {
+                setupLog('setSendToOthers',response,false)
             });
             function sendMessage() {
-                var input = document.getElementById('message');
-                var val = input.value;
+                var val = document.getElementById('message').value;
                 socket.emit('message', val);
             }
             function getLocationMoments() {
-                var input = document.getElementById('id_location');
-                var val = input.value;
-                var body = {
-                    id_location: val
-                }
-                socket.emit('get_location_moments', body);
+                var val = document.getElementById('id_location').value;
+                var body = {id_location: val}
+                socket.emit('getLocationMoments', body);
             }
             function sendToOthers() {
-                socket.emit('get_send_to_others', "response");
+                socket.emit('getSendToOthers', "response");
+            }
+            function setupLog(event,response,print) {
+                if(print) {
+                    var node = document.createElement("LI");
+                    var textnode = document.createTextNode('<strong>'+event+'</strong>: ' + response);
+                    node.appendChild(textnode);
+                    logs.appendChild(node);
+                } else {
+                    console.log(event,response)
+                }
             }
         </script>
     </body>
