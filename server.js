@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
     });
     
     socket.on('get_send_to_others', (text) => {
-        socket.emit('set_send_to_others', text)
+        socket.broadcast.emit('set_send_to_others', text)
     });
     
     socket.on('get_location_moments', (payload) => {
@@ -35,8 +35,8 @@ io.on('connection', (socket) => {
             data: payload,
             json: true
         }, function(err, res, body) {
-            console.log(socket.id)
-            io.to(socket.id).emit('set_location_moments', body)
+            socket.emit('set_location_moments', body)
+            // io.to(socket.id).emit('set_location_moments', body)
         });
     });
     
@@ -47,7 +47,8 @@ io.on('connection', (socket) => {
             data: payload,
             json: true
         }, function(err, res, body) {
-            io.to(socket.id).emit('setMapMarkers', body)
+            // io.to(socket.id).emit('setMapMarkers', body)
+            socket.emit('setMapMarkers', body)
         });
     });
     
