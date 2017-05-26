@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
             data: payload,
             json: true
         }, function(err, res, body) {
-            socket.emit('set_location_moments', body)
+            socket.emit('setLocationMoments', body)
         });
     });
     

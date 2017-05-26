@@ -27,8 +27,8 @@
             socket.on('messageReceived', function(response) {
                 setupLog('messageReceived',response,true)
             });
-            socket.on('getLocationMoments', function(response) {
-                setupLog('getLocationMoments',response,false)
+            socket.on('setLocationMoments', function(response) {
+                setupLog('setLocationMoments',response,false)
             });
             socket.on('setSendToOthers', function(response) {
                 setupLog('setSendToOthers',response,false)
