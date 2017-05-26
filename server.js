@@ -50,4 +50,15 @@ io.on('connection', (socket) => {
         });
     });
     
+    socket.on('submitNewMoment', (payload) => {
+        request({
+            url: API_BASEURL + '/moments/',
+            method: 'POST',
+            data: payload,
+            json: true
+        }, function(err, res, body) {
+            socket.emit('suggestGetMapMarkers')
+        });
+    });
+    
 });
