@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>RightNow Socket Handling</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="./assets/css/main.css">
     </head>
     <body>
         <div class="flex">
@@ -34,6 +33,76 @@
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="./assets/js/main.js"></script>
+        <script>
+        
+            var socket = io();
+
+            var $logs,
+                $body;
+
+            socket.on('clientConnected', function(response) {
+                setupLog('clientConnected',response,true)
+            });
+
+            socket.on('messageReceived', function(response) {
+                setupLog('messageReceived',response,true)
+            });
+
+            socket.on('setLocationMoments', function(response) {
+                setupLog('setLocationMoments',response,false)
+            });
+
+            socket.on('setSendToOthers', function(response) {
+                setupLog('setSendToOthers',response,false)
+            });
+
+            $(function() {
+                
+                $logs = $('#logs');
+                $body = $('body');
+                
+                sendMessage();
+                getLocationMoments();
+                sendToOthers();
+            })
+
+            var sendMessage = $.fn.sendMessage = function() {
+                var onSendMessage = $body.on('submit', '#sendMessage', function(e) {
+                    e.preventDefault();
+                    var val = $('#message').val();
+                    if(val) {
+                        socket.emit('message', val);
+                    }
+                })
+            }
+
+            var getLocationMoments = $.fn.getLocationMoments = function() {
+                var onGetLocationMoments = $body.on('submit', '#getLocationMoments', function(e) {
+                    e.preventDefault();
+                    var val = $('#id_location').val();
+                    if(val) {
+                        var body = {id_location: val}
+                        socket.emit('getLocationMoments', body);
+                    }
+                })
+            }
+
+            var sendToOthers = $.fn.sendToOthers = function() {
+                var onSendToOthers = $body.on('submit', '#sendToOthers', function(e) {
+                    e.preventDefault();
+                    socket.emit('getSendToOthers', "response");
+                })
+            }
+
+            var setupLog = $.fn.setupLog = function(event,response,print) {
+                if(print) {
+                    var log = "<li>" + "<strong>" + event + "</strong>" + ": " + response + "</li>";
+                    logs.append(log)
+                } else {
+                    console.log(event,response)
+                }
+            }
+
+        </script>
     </body>
 </html>
