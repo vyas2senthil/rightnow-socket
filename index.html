@@ -1,18 +1,20 @@
 <html>
     <body>
-        <div style="float:left;width:50%;padding:10px">
-            <ul id='logs'></ul>
-        </div>
-        <div style="float:left;width:50%;padding:10px">
-            <form id="sendMessage">
-                <input type="text" id="message" />
-                <button type="button" onclick="sendMessage()">INVIA MESSAGGIO</button>
-            </form>
-            <form id="sendMessage">
-                <input type="text" id="id_location" />
-                <button type="button" onclick="getLocationMoments()">GET LOCATION MOMENTS</button>
-            </form>
-            <button type="button" onclick="sendToOthers()">SEND TO OTHERS</button>
+        <div style="display:flex">
+            <div style="float:left;width:50%;padding:10px">
+                <ul id='logs'></ul>
+            </div>
+            <div style="float:left;width:50%;padding:10px">
+                <div id="sendMessage">
+                    <input type="text" id="message" />
+                    <button type="button" onclick="sendMessage()">INVIA MESSAGGIO</button>
+                </div>
+                <div id="sendMessage">
+                    <input type="text" id="id_location" />
+                    <button type="button" onclick="getLocationMoments()">GET LOCATION MOMENTS</button>
+                </div>
+                <button type="button" onclick="sendToOthers()">SEND TO OTHERS</button>
+            </div>
         </div>
         <script src="/socket.io/socket.io.js"></script>
         <script>
