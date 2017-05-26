@@ -30,12 +30,6 @@
                 node.appendChild(textnode);
                 logs.appendChild(node);
             });
-            socket.on('time', function(string) {
-                var node = document.createElement("LI");
-                var textnode = document.createTextNode('TIME: ' + string);
-                node.appendChild(textnode);
-                logs.appendChild(node);
-            });
             socket.on('messageReceived', function(string) {
                 var node = document.createElement("LI");
                 var textnode = document.createTextNode('MESSAGE RECEIVED: ' + string);
@@ -63,7 +57,7 @@
             }
             function sendToOthers() {
                 console.log(socket)
-                socket.emit('get_send_to_others');
+                socket.emit('get_send_to_others', "response");
             }
         </script>
     </body>

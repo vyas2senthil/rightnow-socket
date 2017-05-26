@@ -18,8 +18,6 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
     
-    console.log(socket)
-    
     io.emit('clientConnected', "Client with SOCKET ID: " + socket.id + " connected on port: " + PORT + " and index: " + INDEX)
     
     socket.on('message', (text) => {
