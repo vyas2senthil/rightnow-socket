@@ -66,10 +66,12 @@ io.on('connection', (socket) => {
     
     socket.on('joinRoom', (payload) => {
         socket.join(payload)
+        console.log(payload)
     });
     
     socket.on('leaveRoom', (payload) => {
         socket.leave(payload)
+        console.log(payload)
     });
     
 });
