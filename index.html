@@ -56,6 +56,14 @@
                 setupLog('setSendToOthers',response,false)
             });
 
+            socket.on('joinRoom', function(response) {
+                setupLog('joinRoom',response,true)
+            });
+
+            socket.on('leaveRoom', function(response) {
+                setupLog('leaveRoom',response,true)
+            });
+
             $(function() {
                 
                 $logs = $('#logs');

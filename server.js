@@ -8,6 +8,9 @@ const request = require('ajax-request');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
+const GOOGLE_API_KEY = "AIzaSyBCTMTBz9Q3c-xIwSkMuxiaRj3jyx41Bi0";
+const FACEBOOK_API_KEY = "102180050321783";
+
 const API_BASEURL = "https://rightnow.000webhostapp.com";
 
 const server = express()
@@ -59,6 +62,14 @@ io.on('connection', (socket) => {
         }, function(err, res, body) {
             io.emit('suggestGetMapMarkers')
         });
+    });
+    
+    socket.on('joinRoom', (payload) => {
+        socket.join(payload)
+    });
+    
+    socket.on('leaveRoom', (payload) => {
+        socket.leave(payload)
     });
     
 });
