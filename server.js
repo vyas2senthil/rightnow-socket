@@ -64,6 +64,17 @@ io.on('connection', (socket) => {
         });
     });
     
+    socket.on('getLocation', (payload) => {
+        request({
+            url: API_BASEURL + '/locations/complex/',
+            method: 'GET',
+            data: payload,
+            json: true
+        }, function(err, res, body) {
+            socket.emit('setLocation', body)
+        });
+    });
+    
     socket.on('joinRoom', (payload) => {
         socket.join(payload)
         console.log(payload)
