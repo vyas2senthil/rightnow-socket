@@ -18,9 +18,15 @@
                 </form>
                 <form id="joinRoom" class="form-inline" style="padding: 20px 0;">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="room_name" />
+                        <input type="text" class="form-control" id="join_room_name" />
                     </div>
-                    <button type="submit" class="btn btn-primary">GET LOCATION MOMENTS</button>
+                    <button type="submit" class="btn btn-primary">JOIN ROOM</button>
+                </form>
+                <form id="leaveRoom" class="form-inline" style="padding: 20px 0;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="leave_room_name" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">LEAVE ROOM</button>
                 </form>
                 <form id="getLocationMoments" class="form-inline" style="padding: 20px 0;">
                     <div class="form-group">
@@ -79,6 +85,7 @@
                 getLocationMoments();
                 sendToOthers();
                 joinRoom();
+                leaveRoom();
             })
 
             var sendMessage = $.fn.sendMessage = function() {
@@ -95,10 +102,21 @@
             var joinRoom = $.fn.joinRoom = function() {
                 var onJoinRoom = $body.on('submit', '#joinRoom', function(e) {
                     e.preventDefault();
-                    var val = $('#room_name').val();
+                    var val = $('#join_room_name').val();
                     if(val) {
-                        socket.emit('joinRoom', 'room' + val);
-                        $('#room_name').val("");
+                        socket.emit('joinRoom', val);
+                        $('#join_room_name').val("");
+                    }
+                })
+            }
+            
+            var leaveRoom = $.fn.joinRoom = function() {
+                var onLeaveRoom = $body.on('submit', '#leaveRoom', function(e) {
+                    e.preventDefault();
+                    var val = $('#leave_room_name').val();
+                    if(val) {
+                        socket.emit('leaveRoom', val);
+                        $('#leave_room_name').val("");
                     }
                 })
             }
