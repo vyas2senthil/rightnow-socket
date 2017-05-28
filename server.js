@@ -5,7 +5,8 @@ const socketIO = require('socket.io');
 const path = require('path');
 const request = require('ajax-request');
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
 const GOOGLE_API_KEY = "AIzaSyBCTMTBz9Q3c-xIwSkMuxiaRj3jyx41Bi0";
