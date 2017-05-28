@@ -63,7 +63,6 @@ io.on('connection', (socket) => {
             io.emit('suggestGetMapMarkers')
             if(body.status == 200 && body.data.location.id) {
                 io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation', body.data.location.id)
-                // io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation')
             }
         });
     });
@@ -85,12 +84,10 @@ io.on('connection', (socket) => {
     
     socket.on('joinRoom', (payload) => {
         socket.join(payload)
-        console.log(payload)
     });
     
     socket.on('leaveRoom', (payload) => {
         socket.leave(payload)
-        console.log(payload)
     });
     
 });
