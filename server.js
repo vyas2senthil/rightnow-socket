@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
             io.emit('suggestGetMapMarkers')
             if(body.data.location.id) {
                 console.log(payload)
-                io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation')
+                // io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation')
             }
         });
     });
