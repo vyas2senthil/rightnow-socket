@@ -61,9 +61,9 @@ io.on('connection', (socket) => {
             json: true
         }, function(err, res, body) {
             io.emit('suggestGetMapMarkers')
-            if(body.data.id) {
-                io.sockets.in('location' + body.data.id).emit('suggestGetLocation')
-                console.log(body.data.id)
+            if(body.data.id_location) {
+                io.sockets.in('location' + body.data.id_location).emit('suggestGetLocation')
+                console.log(body.data.id_location)
             }
         });
     });
