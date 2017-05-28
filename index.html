@@ -16,6 +16,12 @@
                     </div>
                     <button type="submit" class="btn btn-primary">INVIA MESSAGGIO</button>
                 </form>
+                <form id="joinRoom" class="form-inline" style="padding: 20px 0;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="room_name" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">GET LOCATION MOMENTS</button>
+                </form>
                 <form id="getLocationMoments" class="form-inline" style="padding: 20px 0;">
                     <div class="form-group">
                         <input type="text" class="form-control" id="id_location" />
@@ -72,6 +78,7 @@
                 sendMessage();
                 getLocationMoments();
                 sendToOthers();
+                joinRoom();
             })
 
             var sendMessage = $.fn.sendMessage = function() {
@@ -81,6 +88,17 @@
                     if(val) {
                         socket.emit('message', val);
                         $('#message').val("");
+                    }
+                })
+            }
+            
+            var joinRoom = $.fn.joinRoom = function() {
+                var onJoinRoom = $body.on('submit', '#joinRoom', function(e) {
+                    e.preventDefault();
+                    var val = $('#room_name').val();
+                    if(val) {
+                        socket.emit('joinRoom', 'room' + val);
+                        $('#room_name').val("");
                     }
                 })
             }
