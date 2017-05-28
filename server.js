@@ -54,7 +54,6 @@ io.on('connection', (socket) => {
     });
     
     socket.on('submitNewMoment', (payload) => {
-        console.log(payload)
         request({
             url: API_BASEURL + '/moments/',
             method: 'POST',
@@ -63,6 +62,7 @@ io.on('connection', (socket) => {
         }, function(err, res, body) {
             io.emit('suggestGetMapMarkers')
             if(body.data.location.id) {
+                console.log(payload)
                 io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation')
             }
         });
