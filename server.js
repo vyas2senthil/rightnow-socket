@@ -67,6 +67,23 @@ io.on('connection', (socket) => {
         });
     });
     
+    socket.on('submitNewComment', (payload) => {
+        request({
+            url: API_BASEURL + '/comments/',
+            method: 'POST',
+            data: {
+                content: payload.content,
+                id_user: payload.id_user,
+                id_moment: payload.id_moment
+            },
+            json: true
+        }, function(err, res, body) {
+            if(body.status == 200) {
+                io.sockets.in('location' + payload.id_location).emit('suggestGetLocation', payload.id_location)
+            }
+        });
+    });
+    
     socket.on('emitEventInRoom', (payload) => {
         io.sockets.in(payload.room).emit('emittedInRoom', payload.event)
     });
