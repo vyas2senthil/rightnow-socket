@@ -54,6 +54,7 @@ io.on('connection', (socket) => {
     });
     
     socket.on('submitNewMoment', (payload) => {
+        console.log(payload)
         request({
             url: API_BASEURL + '/moments/',
             method: 'POST',
