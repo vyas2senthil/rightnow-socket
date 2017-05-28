@@ -61,8 +61,8 @@ io.on('connection', (socket) => {
             json: true
         }, function(err, res, body) {
             io.emit('suggestGetMapMarkers')
-            if(body.data.location.id) {
-                console.log(body)
+            if(body.status == 200 && body.data.location.id) {
+                io.sockets.in('location' + body.data.location.id).emit('emittedInRoom', body.data.location.id)
                 // io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation')
             }
         });
