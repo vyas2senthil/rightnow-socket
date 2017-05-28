@@ -68,6 +68,10 @@ io.on('connection', (socket) => {
         });
     });
     
+    socket.on('emitEventInRoom', (payload) => {
+        io.sockets.in(payload.room).emit('emittedInRoom', payload.event)
+    });
+    
     socket.on('getLocation', (payload) => {
         request({
             url: API_BASEURL + '/locations/complex/',

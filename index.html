@@ -37,6 +37,13 @@
                 <form id="sendToOthers" class="form-inline" style="padding: 20px 0;">
                     <button type="submit" class="btn btn-primary">SEND TO OTHERS</button>
                 </form>
+                <form id="emitEventInRoom" class="form-inline" style="padding: 20px 0;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="room" />
+                        <input type="text" class="form-control" id="event" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">EMIT EVENT IN ROOM</button>
+                </form>
             </div>
             <div class="col-md-8">
                 <ul id='logs'></ul>
@@ -74,6 +81,10 @@
 
             socket.on('leaveRoom', function(response) {
                 setupLog('leaveRoom',response,true)
+            });
+
+            socket.on('emittedInRoom', function(response) {
+                setupLog('emittedInRoom',response,true)
             });
 
             $(function() {
@@ -117,6 +128,20 @@
                     if(val) {
                         socket.emit('leaveRoom', val);
                         $('#leave_room_name').val("");
+                    }
+                })
+            }
+            
+            var emitEventInRoom = $.fn.emitEventInRoom = function() {
+                var onEmitEventInRoom = $body.on('submit', '#emitEventInRoom', function(e) {
+                    e.preventDefault();
+                    var event = $('#event').val();
+                    var room = $('#room').val();
+                    if(event && room) {
+                        socket.emit('emitEventInRoom', {
+                            event: event,
+                            room: room
+                        });
                     }
                 })
             }
