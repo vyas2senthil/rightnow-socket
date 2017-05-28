@@ -62,7 +62,7 @@ io.on('connection', (socket) => {
         }, function(err, res, body) {
             io.emit('suggestGetMapMarkers')
             if(body.status == 200 && body.data.location.id) {
-                io.sockets.in('location' + body.data.location.id).emit('emittedInRoom', body.data.location.id)
+                io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation', body.data.location.id)
                 // io.sockets.in('location' + body.data.location.id).emit('suggestGetLocation')
             }
         });
