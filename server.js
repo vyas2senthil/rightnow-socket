@@ -12,7 +12,8 @@ const INDEX = path.join(__dirname, 'index.html');
 const GOOGLE_API_KEY = "AIzaSyBCTMTBz9Q3c-xIwSkMuxiaRj3jyx41Bi0";
 const FACEBOOK_API_KEY = "102180050321783";
 
-const API_BASEURL = "https://rightnow.000webhostapp.com";
+// const API_BASEURL = "https://rightnow.000webhostapp.com";
+const API_BASEURL = "http://rightnow-dev.it";
 
 const server = express()
     .use((req, res) => res.sendFile(INDEX) )
